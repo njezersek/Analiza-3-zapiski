@@ -1,0 +1,114 @@
+%--------------------
+% Packages
+% -------------------
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+
+\usepackage[pdftex]{graphicx} % Required for including pictures
+\usepackage[pdftex,linkcolor=black,pdfborder={0 0 0}]{hyperref} % Format links for pdf
+\usepackage{calc} % To reset the counter in the document after title page
+\usepackage{enumitem} % Includes lists
+
+\usepackage{ amssymb } % extra math symbols
+\usepackage{ amsmath } % extra math symbols
+\usepackage{ dsfont } % font za množice
+% tabele
+\usepackage{array}
+\usepackage{wrapfig}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\frenchspacing % No double spacing between sentences
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.1em}
+
+\usepackage[a4paper, lmargin=0.1666\paperwidth, rmargin=0.1666\paperwidth, tmargin=0.1111\paperheight, bmargin=0.1111\paperheight]{geometry} %margins
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\begin{document} 
+
+\section*{Integral s parametrom}
+Naj bo $D = [a,b]\times [c,d]$ in $f: D \to \mathbb{R}$ dana funkcija. Integralu
+\[F(y) = \int_a^b f(x,y) dx \]
+pravimo integral s parametrom.
+
+\subsubsection*{Zveznost integrala s parametrom}
+Če je $f: [a,b]\times [c,d] \to \mathbb{R}$ zvezna, je $F$ zvezna na $[c,d]$.
+
+\subsubsection*{Odvajnaje pod integralom}
+Naj bo $f$ zvezna nad $D$ in $f_y$ zvezna nad $D$. Potem je 
+\[F'(y) = \int_a^b f_y(x,y) dx \]
+
+\subsubsection*{Odvajnaje integrala}
+Naj bosta $u,v: [c,d] \to [a,b]$ in $u,v \in \mathcal{C}^1([c,d])$,\\
+$f \in \mathcal{C}([a,b]\times [c,d])$, $f_y \in \mathcal{C}([a,b]\times [c,d])$
+
+Definirajmo: \[F(y) = \int_{u(y)}^{v(y)} f(x,y) dx\]
+Potem je $F$ odvedljiva in \[ F'(y) = \int_{u(y)}^{v(y)} f_y(x,y) dx + f\left(v(y),y\right)v'(y) - f\left(u(y),y\right)u'(y)\]
+
+\subsubsection*{Dvokratno integriranje funkcije}
+Naj bo $f \in \mathcal{C}([a,b]\times [c,d])$. Definirajmo
+\begin{equation*}
+    \begin{aligned}
+        F(y) &= \int_a^b f(x,y) dx  & G(x) &= \int_c^d f(x,y) dy 
+    \end{aligned}
+\end{equation*}
+Potem je
+\[\int_a^b G(x) dx = \int_c^d F(y) dy = \iint_D f(x,y) dxdy\]
+
+\subsection*{Integrali na neomejenih območjih}
+Naj bo $f \in \mathcal{C}([a,\infty] \times [c,d])$:
+\[F(y) := \int_{a}^{\infty}f(x,y) dx = \lim_{b \to \infty} \int_{a}^{b}f(x,y) dx \]
+
+\subsubsection*{Enakomerna konvergenca funkcij}
+Funkcijsko zaporedje $F_b$ enakomerno konvergira proti $F$, če za $\forall \varepsilon > 0 : \exists B : b > B :$
+\[ |F_b(y)-F(y)| < \varepsilon; \quad \forall y \in [c,d]\]
+Če to prepišemo v obliki integrala, dobimo:
+\[ |F_b(y) - F(y)| = \left|\int_a^b f(x,y)dx - \int_a^{\infty} f(x,y)dx \right| = \left|\int_b^{\infty} f(x,y)dx \right| < \varepsilon; \quad \forall y \in [c,d]\]
+
+Integral s parametrom je enakomerno konvergenten na $[c,d]$, če za $\forall \varepsilon > 0 : \exists B : \forall b > B :$
+\[ \left|\int_b^{\infty} f(x,y)dx \right| < \varepsilon \]
+
+\emph{Posledica:} Če je za $f \in \mathcal{C}([a,\infty] \times [c,d])$ integral s parametrom $F(x) = \int_a^{\infty} f(x,y) dx$ enakomerno konvergenten na $[c,d]$, je $F$ zvezna na $[c,d]$.
+
+\subsubsection*{Menjava vrstnega reda integracije}
+Naj bo $f \in \mathcal{C} ([a,\infty] \times [c,d])$ in $ F(y) := \int_a^{\infty} f(x,y) dx$ enakomerno konvergentna. Definirajmo še $G(x) = \int_c^d f(x,y) dy$. Potem velja
+\[\int_c^d F(y) dy = \int_a^{\infty} G(x) dx  \]
+oziroma
+\[\int_c^d dy \int_a^{\infty} f(x,y) dx = \int_a^{\infty} dx \int_c^d f(x,y) dy \]
+
+\subsubsection*{Odvajanje integrala na neomejenih območjih}
+Naj bosta $f,f_y \in \mathcal{C}([a,\infty]\times [c,d])$, $F(y) := \int_a^{\infty} f(x,y) dx$ obstaja za $\forall y \in [c,d]$ 
+in $G(y) := \int_a^{\infty} f_y(x,y) dx$ enakomerno konvergira na $[c,d]$.
+
+Potem je $F$ odvedljiva in $F'(y) = G(y)$.
+
+\subsection*{Funkcija $\Gamma$}
+Funkcija gama je definirana s predpisom
+\[ \Gamma(s) = \int_0^{\infty} x^{s-1} e^{-x} dx, \qquad \forall s > 0 \]
+
+Lastnosti funkcije gama:
+\begin{enumerate}
+    \item $\Gamma(1) = 1$
+    \item $\Gamma(s+1) = s \Gamma(s)$
+    \item $\Gamma(\frac{1}{2}) = \sqrt{\pi}$
+    \item $\Gamma(n+1) = n!\qquad n\in \mathbb{R}$
+\end{enumerate}
+
+\subsection*{Funkcija $B$}
+Funkciaj beta je definirana kot
+\[B(p,q) = \int_0^1 x^{p-1} (1-x)^{q-1} dx, \qquad \forall p,q > 0\]
+
+Lastnosti funkcije beta:
+\begin{enumerate}
+    \item simetričnost: $B(p,q) = B(q,p)$
+    \item $\displaystyle B(p,q) = \int_0^{\infty} \frac{u^{p-1}}{(1+u)^{p+q}}du $
+    \item $\displaystyle B(p,q) = \frac{\Gamma(p) \Gamma(q)}{\Gamma(p+q)}$
+    \item $\displaystyle \int_0^{\frac{\pi}{2}} (\sin x)^{2p-1} (\cos x)^{2q-1} = \frac{1}{2} B(p,q)$
+\end{enumerate}
+
+
+\section*{Dvojni in trojni integral}
+    
+\end{document}

@@ -1,0 +1,492 @@
+\documentclass[a4paper,8pt]{extarticle}
+\usepackage{amssymb,amsmath,amsthm,amsfonts}
+\usepackage{multicol,multirow}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{tabularx}
+\usepackage[utf8]{inputenc}
+\usepackage[landscape]{geometry}
+\usepackage[colorlinks=true,citecolor=blue,linkcolor=blue]{hyperref}
+\usepackage{accents}
+\newcommand{\vect}[1]{\accentset{\rightharpoonup}{#1}}
+
+\ifthenelse{\lengthtest { \paperwidth = 11in}}
+    { \geometry{top=.5in,left=.5in,right=.5in,bottom=.5in} }
+	{\ifthenelse{ \lengthtest{ \paperwidth = 297mm}}
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+		{\geometry{top=1cm,left=1cm,right=1cm,bottom=1cm} }
+	}
+\pagestyle{empty}
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%x
+                                {\normalfont\large\bfseries}}
+\renewcommand{\subsection}{\@startsection{subsection}{2}{0mm}%
+                                {-1explus -.5ex minus -.2ex}%
+                                {0.5ex plus .2ex}%
+                                {\normalfont\normalsize\bfseries}}
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{0mm}%
+                                {-1ex plus -.5ex minus -.2ex}%
+                                {1ex plus .2ex}%
+                                {\normalfont\small\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{0}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt plus 0.5ex}
+% -----------------------------------------------------------------------
+
+\title{Analiza 2}
+
+\begin{document}
+
+\raggedright
+\footnotesize
+
+\begin{multicols}{4}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+\section*{Integral s parametrom}
+Naj bo $D = [a,b]\times [c,d]$ in $f: D \to \mathbb{R}$ dana funkcija.
+\[F(y) = \int_a^b f(x,y) dx \]
+\subsubsection{Zveznost}
+Če je $f$ zvezna, je $F(y)$ zvezna na $[c,d]$.
+
+
+\subsubsection{Odvajanje integrala}
+Naj bosta $u,v: [c,d] \to [a,b]$ in $u,v \in \mathcal{C}^1([c,d])$,\\
+$f \in \mathcal{C}([a,b]\times [c,d])$, $f_y \in \mathcal{C}([a,b]\times [c,d])$
+
+Definirajmo: \[F(y) = \int_{u(y)}^{v(y)} f(x,y) dx\]
+Potem je $F$ odvedljiva in \[ F'(y) = \int_{u(y)}^{v(y)} f_y(x,y) dx + f\left(v(y),y\right)v'(y) - f\left(u(y),y\right)u'(y)\]
+
+\subsubsection{Dvokratno integriranje funkcije}
+Če je $f$ zvezna funkcija $f \in \mathcal{C}([a,b]\times [c,d])$, lahko zamenjamo vrstni red integracije:
+\[\int_a^b \int_c^d f(x,y) dy\, dx = \int_c^d \int_a^b f(x,y) dx\, dy\]
+
+\subsubsection{Integral z limito}
+Če je $f$ zvezna, $f \in \mathcal{C}([a,b] \times [Y-\varepsilon,Y+\varepsilon])$, velja:
+\[\lim_{y\to Y} \int_a^b f(x,y) dx = \int_a^b \lim_{y\to Y} f(x,y) dx\]
+
+\section{Integrali na neomejenih območjih}
+Naj bo $f \in \mathcal{C}([a,\infty] \times [c,d])$:
+\[F(y) := \int_{a}^{\infty}f(x,y) dx = \lim_{b \to \infty} \int_{a}^{b}f(x,y) dx \]
+
+\subsubsection{Enakomerna konvergenca funkcij}
+Funkcijsko zaporedje $F_b$ enakomerno konvergira proti $F$, če za $\forall \varepsilon > 0 : \exists B : b > B :$
+\[ |F_b(y)-F(y)| < \varepsilon; \quad \forall y \in [c,d]\]
+
+
+Integral s parametrom je enakomerno konvergenten na $[c,d]$, če za $\forall \varepsilon > 0 : \exists B : \forall b > B :$
+\[ \left|\int_b^{\infty} f(x,y)dx \right| < \varepsilon \]
+
+\emph{Posledica:} Če je za $f \in \mathcal{C}([a,\infty] \times [c,d])$ integral s parametrom $F(x) = \int_a^{\infty} f(x,y) dx$ enakomerno konvergenten na $[c,d]$, je $F$ zvezna na $[c,d]$.
+
+\subsubsection{Menjava vrstnega reda integracije}
+Naj bo $f \in \mathcal{C} ([a,\infty] \times [c,d])$ in $ F(y) := \int_a^{\infty} f(x,y) dx$ \emph{enakomerno konvergentna}. Definirajmo še $G(x) = \int_c^d f(x,y) dy$. Potem velja
+\[\int_c^d dy \int_a^{\infty} f(x,y) dx = \int_a^{\infty} dx \int_c^d f(x,y) dy \]
+
+\subsubsection{Odvajanje integrala na neomejenih območjih}
+Naj bosta $f,f_y \in \mathcal{C}([a,\infty]\times [c,d])$, $F(y) := \int_a^{\infty} f(x,y) dx$ obstaja za $\forall y \in [c,d]$ 
+in $G(y) := \int_a^{\infty} f_y(x,y) dx$ \emph{enakomerno konvergira} na $[c,d]$.
+
+Potem je $F$ odvedljiva in 
+\[F'(y) = \int_a^{\infty} f_y(x,y) dx \]
+
+\subsection*{Funkcija $\Gamma$}
+\begin{itemize}
+    \item $ \Gamma(s) = \int_0^{\infty} x^{s-1} e^{-x} dx, \qquad \forall s > 0 $
+    \item $\Gamma(1) = 1$
+    \item $\Gamma(s+1) = s \Gamma(s)$
+    \item $\Gamma(\frac{1}{2}) = \sqrt{\pi}$
+    \item $\Gamma(n+1) = n!\qquad n\in \mathbb{N}$
+    \item $\Gamma(x)\Gamma(x+1) = \frac{\pi}{\sin(\pi x)}$
+\end{itemize}
+
+\subsection*{Funkcija $B$}
+\begin{itemize}
+    \item $B(p,q) = \int_0^1 x^{p-1} (1-x)^{q-1} dx, \qquad \forall p,q > 0$
+    \item $\displaystyle B(p,q) = \int_0^{\infty} \frac{u^{p-1}}{(1+u)^{p+q}}du $
+    \item $\displaystyle B(p,q) = \frac{\Gamma(p) \Gamma(q)}{\Gamma(p+q)}$
+    \item $\frac{1}{2} B(p,q) = \displaystyle \int_0^{\frac{\pi}{2}} (\sin x)^{2p-1} (\cos x)^{2q-1}$
+    \item simetričnost: $B(p,q) = B(q,p)$
+\end{itemize}
+
+Gaussov integral: \[\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}\]
+
+\section{Trigonometrične identitete}
+\[
+    \begin{aligned}
+        &\sin(x \pm y) = \sin(x) \cos(y) \pm \cos(x) \sin(y) \\
+        &\cos(x \pm y) = \cos(x) \cos(y) \mp \sin(x) \sin(y)\\
+        &\tan(x \pm y) = \frac{\tan(x)\pm \tan(y)}{1 \mp \tan(x) \tan(y)}\\
+        &\cot(x \pm y) = \frac{\cot(x)\cot(y) \mp 1}{\tan(x) \pm \tan(y)}\\
+        &\sin^2(x)+\cos^2(x) = 1\\
+        &1+\cot^2(x) = \frac{1}{\sin^2(x)}\\
+        &1+\tan^2(x) = \frac{1}{\cos^2(x)}\\
+    \end{aligned}
+\]
+
+\section{Koordinatni sistemi}
+Nove koordinate uvedemo z dimorfizmom (glatka bijekcija z gladkim inverzom) $g: \Pi \to P$.
+\[g(u_1,...,u_n) = (g_1(u_1, ..., u_n), ..., g_n(...))\]
+
+Zanjo lahko izračunamo jakobijevo matriko:
+\[
+    J_g = \begin{bmatrix}
+        \frac{\partial g_1}{\partial u_1} & \dots & \frac{\partial g_1}{\partial u_n} \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial g_n}{\partial u_1} & \dots & \frac{\partial g_n}{\partial u_n} \\
+    \end{bmatrix}
+\]
+\[
+    \int_P f(x_1,...,x_n) dP = \int_\Pi f(g(u_1,...,u_n)) |\det J_g| d\Pi
+\]
+\subsubsection{Polarne koordinate}
+\[
+    \begin{aligned}
+        \begin{aligned}
+            x &= r \cos \varphi \\
+            y &= r \sin \varphi
+        \end{aligned}
+        && 
+        |\textmd{det} J| = r\\
+    \end{aligned}
+\]
+\subsubsection{Eliptične koordinate}
+\[
+    \begin{aligned}
+        \begin{aligned}
+            x &= a\,r \cos \varphi \\
+            y &= b\,r \sin \varphi
+        \end{aligned}
+        && 
+        |\textmd{det} J| = a\,b\,r\\
+    \end{aligned}
+\]
+\subsubsection{Cilindrične koordinate}
+\[
+    \begin{aligned}
+        \begin{aligned}
+            x &= r \cos \varphi \\
+            y &= r \sin \varphi \\
+            z &= z
+        \end{aligned}
+        && 
+        |\textmd{det} J| = r\\
+    \end{aligned}
+\]
+\subsubsection{Sferične koordinate}
+\[
+    \begin{aligned}
+        \begin{aligned}
+            x &= r \cos \varphi \cos \theta\\
+            y &= r \sin \varphi \cos \theta \\
+            z &= r \sin \theta
+        \end{aligned}
+        && 
+        |\textmd{det} J| = r^2 \cos \theta\\
+    \end{aligned}
+\]
+
+\subsection{Izračun težišča}
+\[m = \iint_P \rho dP \]
+\[x_T = \frac{\iint_P x \rho dP}{m} \]
+
+\subsection{Krivuljni integral}
+$\gamma: [a,b] \to \mathbb{R}^n$ odsekoma $\mathcal{C}^1$, $f$ zvezna funkcija
+\[\int_\gamma f\, ds = \int_a^b f(\gamma(t))\,|\dot{\gamma}(t)|\, dt\]
+Dolžina krivulje je
+\[\int_\gamma 1\, ds = \int_a^b |\dot{\gamma}(t)|\, dt\]
+
+\subsubsection{Delo}
+\[A = \int_\gamma \vect{F} d\vect{r} \]
+\[\int_\alpha^\beta (f_1(x(t),y(t)),f_2(x(t),y(t))) \cdot (\dot{x}(t), \dot{y}(t)) dt\]
+\[
+    \begin{aligned}
+        r(t) &= (x(t),y(t)) & F &= (f_1,f_2)
+    \end{aligned}
+\]
+
+\subsubsection{Greenova formula}
+Naj bo $D$ pozitivno orientirano območje.
+\[\int_{\partial D} \vect{F} d\vect{r} = \int_D \text{rot}\vect{F} dP\]
+\[\text{rot}\vect{F} = f_{2x} - f_{1y}\]
+\subsection{Ploskovni integral}
+Ploskev podamo parametrično v obliki:
+\[\vect{r}(u,v) = (x(u,v),y(u,v),z(u,v))\]
+Ploščina je tedaj:
+\[\iint_D |\vect{r}_u \times \vect{r}_v| \, dudv = \iint_D \sqrt{EG-F^2}\]
+\[
+\begin{aligned}
+    E &= \vect{r}_u \cdot \vect{r}_u & F &= \vect{r}_u \cdot \vect{r}_v & G &= \vect{r}_v \cdot \vect{r}_v
+\end{aligned}
+\]
+
+\[
+\vect{a} \times \vect{b} = 
+    \begin{vmatrix}
+        \vect{i} & \vect{j} & \vect{k} \\
+        a_1 & a_2 & a_3 \\
+        b_1 & b_2 & b_3 \\
+    \end{vmatrix}
+\]
+
+\subsection{Kompleksna analiza}
+Funkcija $f: D \to \mathbb{C}$ ($D$ odprta podmnožica v $\mathbb{C}$) je odvedljiva v točki $z \in \mathbb{C}$,
+če obstaja limita:
+\[ f'(z) := \lim_{h\to 0} \frac{f(z+h)-f(z)}{h}\]
+
+Funkcija $f$ je \textbf{holomorfna}, če je odvedlijva $\forall z\in D$.
+\[f(x+iy) = u(x,y) + iv(x,y)\]
+
+$f$ holomorfna $\Leftrightarrow$ veljajo \emph{Cauchy-Riemanove enečbe}:
+\[
+\begin{aligned}
+    u_x &= v_y &
+    u_y &= -v_x
+\end{aligned}
+\]
+
+Laplacov operator:
+\[\Delta u = u_{xx} + u_{yy}\]
+Če je $\Delta u = 0$ in $u\in \mathcal{C}^2$ je funkcija $u$ harmonična.
+
+\subsubsection{Integral po poti}
+Pot je pozitovno orientirana, če je območje na levi.
+
+
+Naj bo $f \in \mathcal{C}(D)$, $D^{\textmd{odprta}} \subseteq \mathbb{C}$, $\gamma: [a,b] \to D$ odsekoma zvezna.
+\[\int_\gamma f(z) dz = \int_a^b f(\gamma(t))\,\dot{\gamma}(t)\, dt\]
+
+Naj bo $D^{\textmd{odprta}} \subseteq \mathbb{C}$, $\Omega \subset D$ omejeno območje s kosoma gladkim robom, $\overline{\Omega}\subset D$.
+Če je $f$ holomorfna na $D$, je
+\[\int_{\partial \Omega} f(z) dz = 0\]
+
+\subsubsection{Cauchiyev izrek}
+Naj bo $D \subseteq$ enostavno povezano območje, $f$ holomorfna na $D$ in $\gamma$ sklenjena krivulija v $D$.
+\[f(a) \textmd{I}(\gamma,a) = \int_\gamma \frac{f(z)}{z-a}dz\]
+
+$\textmd{I}(\gamma,a) =  2\pi i \cdot \text{št. ovjev $\gamma$ okoli $a$}$
+
+\subsubsection{Laurentova vrsta}
+\[\sum_{n=-\infty}^{\infty} a_n z^n = \underbrace{\sum_{n=-\infty}^{-1} a_n z^n}_{\text{glavni del}} + \underbrace{\sum_{n=0}^{\infty} a_n z^n}_{\text{regularni del}}\]
+Če glavni del konvergira na $|z| > R_1$, regularni del pa na $|z| < R_2$, Laurentova vrsta konvergira na kolobarju $A(a,R_1,R_2)$.
+
+\subsubsection{Znane Taylorjeve vrste}
+\[\frac{1}{1-q} = \sum_{n=0}^\infty q^n \qquad \textit{okoli $q = 0$}\]
+\[(1+x)^\alpha = \sum_{n=0}^\infty \binom{\alpha}{n}x^n \qquad \binom{n}{k} = \frac{n!}{k!(n-k)!}\]
+\[e^x = \sum_{n=0}^\infty \frac{x^n}{n!}\]
+\[\sin x = \sum_{n=0}^\infty \frac{(-1)^n}{(2n+1)!}x^{2n+1}\]
+\[\cos x = \sum_{n=0}^\infty \frac{(-1)^n}{(2n)!}x^{2n}\]
+V splošnem:
+\[f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^{n} \qquad \textit{okoli $a$}\]
+
+\subsubsection{Izrek o ostankih}
+Naj bo $f$ holomorfna na $D$ razen morda v končno točkah $a_1, ..., a_n \in D$
+
+Naj bo $K \subset D$ kompakten, $\partial K$ kosoma gladek in $\partial K \cap \{a_1, ..., a_n\} = \emptyset$
+
+\[\int_{\partial K} f(z)\, dz = 2\pi i \sum_{a_j \in K} \text{Res}(f,a_j)\]
+
+$\text{Res}(f,a)$ je koeficient $c_{-1}$ (pri $(z-a)^{-1}$) pri razvoju $f$ v Laurentovo vrsto okoli $a$.
+
+Če je $a_j$ pol stopnje $n$ funkcije $f$, je
+\[\text{Res}(f,a) = \lim_{z\to a} \frac{1}{(n-1)!}\frac{d^{n-1}}{dz^{n-1}} \left((z-a)^n f(z)\right)\]
+
+\subsection{Pogoste kompleksne formule}
+\[e^{i\varphi} = \cos\varphi + i\sin\varphi\]
+\[
+\begin{aligned}
+    z &= x + iy & \overline{z} &= x - iy & \textmd{Re}z &= \frac{z+\overline{z}}{2} & \textmd{Im}z &= \frac{z-\overline{z}}{2i}
+\end{aligned}
+\]
+
+\section{Odvodi}
+\setlength{\tabcolsep}{0.5em}{\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ | r | l | }
+    \hline
+    \emph{funkcija} & \emph{odvod}\\\hline
+    $c$ & $0$ \\ \hline
+    $x^n$ & $nx^{n-1}$ \\ \hline
+    $a^x$ & $a^x\ln{a}$ \\\hline
+    $\frac{a^x}{\ln a}$ & $a^x$\\\hline
+    $x^x$ & $x^x(1+\ln{x})$ \\\hline
+    $\ln(x)$ & $\frac{1}{x}$ \\\hline
+    $\log_{a}(x)$ & $\frac{1}{x\ln(a)}$ \\\hline
+    $\sin(x)$ & $cos(x)$ \\\hline
+    $\cos(x)$ & $-sin(x)$ \\\hline
+    $\tan(x)$ & $\frac{1}{cos^2(x)}$ \\\hline
+    $\cot(x)$ & $-\frac{1}{sin^2(x)}$ \\\hline
+    $\arcsin(x)$ & $\frac{1}{\sqrt{1-x^2}}$ \\\hline
+    $\arccos(x)$ & $-\frac{1}{\sqrt{1-x^2}}$ \\\hline
+    $\arctan(x)$ & $\frac{1}{1+x^2}$ \\\hline
+    $\textrm{arccot}(x)$ & $-\frac{1}{1+x^2}$ \\\hline
+    $\textrm{sh}(x) = \frac{e^x - e^{-x}}{2}$ & $\textrm{ch}(x)$\\\hline
+    $\textrm{ch}(x) = \frac{e^x + e^{-x}}{2}$ & $\textrm{sh}(x)$\\\hline
+    $\textrm{th}(x) = \frac{\textrm{sh}(x)}{\textrm{ch}(x)}$ & $\frac{1}{\textrm{ch}^2(x)}$\\\hline
+    $\textrm{cth}(x) = \frac{1}{\textrm{th}(x)}$ & $-\frac{1}{\textrm{sh}^2(x)}$\\\hline
+    $\textrm{arsh}(x) = \ln(x+\sqrt{x^2+1})$ & $\frac{1}{\sqrt{1+x^2}}$\\\hline
+    $\textrm{arch}(x) = \ln(x+\sqrt{x^2-1})$ & $\frac{1}{\sqrt{1-x^2}}$\\\hline
+    $\textrm{arth}(x) = \frac{1}{2}\ln{\frac{1+x}{1-x}}$ & $\frac{1}{(1+x)(1-x)}$\\\hline
+\end{tabular}
+}
+
+\subsubsection{Pravila za odvajanje}
+\setlength{\tabcolsep}{0.5em}{\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{ c  c }
+    \emph{funkcija} & \emph{odvod}\\
+    $f(x)\pm g(x)$ & $f'(x)\pm g'(x)$ \\
+    $f(x)\cdot g(x)$ & $f'(x)\cdot g(x) + f(x)\cdot g'(x)$ \\
+    $\frac{f(x)}{g(x)}$ & $\frac{f'(x)\cdot g(x) - f(x) \cdot g'(x)}{g^2(x)}$ \\
+    $f(g(x))$ & $f'(g(x)) \cdot g'(x)$ \\
+    $f^{-1}(x)$ & $\frac{1}{f'(f^{-1}(x))}$
+\end{tabular}
+}
+
+\section{Integracijske metode}
+\subsubsection{Uvedba nove spremenljivke}
+\[ \int f(x)\,dx \underbrace{=}_{x=g(t)} \int f(g(t))g'(t)dt\]
+
+\[u = g(x) \implies du = g'(x) dx \implies dx = \frac{du}{g'(x)}\]
+
+\subsubsection{Perpartes}
+\[\int u(x)\,v'(x)\,dx = u(x)v(x)-\int v(x)\,u'(x)\,dx\]
+
+\subsubsection{Integral racionalne funkcije}
+Z deljenjem zapišemo racionalno funkcijo $R(x)$ v obliki $p(x) + \frac{r(x)}{q(x)}$, kejr je $r$ nižje stopnje od $q$.
+
+Polinom $q$ rezcepimo na linearne in nerazcepne kvadratne faktorje.
+
+Funkcijo $\frac{p(x)}{q(x)}$ zapišemo kot vsoto parcialnih ulomkov:
+\[\frac{1}{(x-a)^k} \leadsto \frac{A_1}{(x-a)}+\frac{A_2}{(x-a)^2} + ... + \frac{A_k}{(x-a)^k} \]
+\[\frac{1}{(x^2+bx+c)^l} \leadsto \frac{B_1 + C_1x}{(x^2+bx+c)} + ... + \frac{B_l + C_lx}{(x^2+bx+c)^l} \]
+Parcialne ulomke posamično integriremo (\emph{imenovalec mora biti nerazcepen!}):
+\[ \int \frac{dx}{ax^2+bx+c} = \frac{1}{a \omega} \arctan \left( \frac{2ax + b}{2a \omega}\right);\ \omega = \frac{c}{a} - \left(\frac{b}{2a}\right)^2\]
+\[ \int \frac{px+q}{\underbrace{ax^2+bx+c}_{t}}dx = \frac{p}{2a} \ln \left| t \right| + \left( q-\frac{pb}{2a} \right) \int \frac{dx}{t}\]
+\[ \int \frac{px+q}{(ax^2+bx+c)^n}dx = \frac{p}{2a}\frac{t^{1-n}}{1-n} + \left( q-\frac{pb}{2a} \right) \int \frac{dx}{t^n}\]
+\[ \int \frac{dx}{(ax^2+bx+c)^n} = \frac{1}{a^n \omega^n} I_n\]
+
+\begin{equation*}
+    \begin{aligned}
+        I_n = \int \frac{dx}{(t^2+1)^n} &&
+        I_1 = \arctan t
+    \end{aligned}
+\end{equation*}
+
+\[ I_n = I_{n-1}\left(1-\frac{1}{2(n-1)}\right) + \frac{t}{2(n-1)(t^2+1)^{n-1}}\]
+
+\subsubsection{Integrali trigonometričnih funkcij}
+Integrale z trigonometričnimi funkcijami z univerzalno trigonometrično substitucijo prevedemo na integral racionalne funkcije.
+\begin{equation*}
+    \begin{aligned}
+        \textmd{tan}\frac{x}{2} = t&&
+        dx = \frac{2dt}{1+t^2}&&
+        \textmd{cos}x = \frac{1-t^2}{1+t^2}&&
+        \textmd{sin}x = \frac{2t}{1+t^2}&&
+    \end{aligned}
+\end{equation*}
+
+\subsubsection{Uporabni integrali}
+\[ \int \sqrt{1+x^2} dx = \frac{1}{2} (x \sqrt{1+x^2}+ln(x+\sqrt{1+x^2}))\]
+\[ \int \sin^2(x) dx = \frac{x}{2}-\frac{1}{4} \sin (2 x)\]
+\[ \int \cos^2(x) dx = \frac{x}{2}+\frac{1}{4} \sin (2 x)\]
+\subsubsection{Integral iracionalne funkcije}
+Integrale tipa $\int \frac{p(x) dx}{\sqrt{ax^2+bx+c}}$ rešujemo na naslednji način:
+
+\begin{itemize}
+    \item Če je $p$ konstanten, integral (z dopolnitvijo do $\blacksquare$ in s substitucijo) prevedemo na enega izmed:
+    \[\int \frac{dx}{\sqrt{a^2-x^2}} = \arcsin\left( \frac{x}{a} \right) + C;\quad a > 0\]
+    \[\int \frac{dx}{\sqrt{x^2-a^2}} = \ln \left| x + \sqrt{x^2 - a^2} \right| + C;\quad a > 0\]
+    \[\int \frac{dx}{\sqrt{x^2+a^2}} = \ln \left( x + \sqrt{x^2 + a^2} \right) + C;\quad a > 0\]
+    \item Če je $p$ poljuben polinom, uporabimo nastavek: \\\ \\
+    $\int \frac{p(x)}{\sqrt{ax^2+bx+c}} dx  = \widetilde{p}(x) \sqrt{ax^2+bx+c} + \int \frac{C}{\sqrt{ax^2+bx+c}}dx $\\
+    $C$ je konstanta, $\widetilde{p}$ pa polinom, ki ima stopnjo 1 manjšo kot $p$. Koeficiente polinoma $\widetilde{p}$ in konstanto $C$ dobimo z odvajanjem zgornje enačbe.
+\end{itemize}
+
+\section{Diferencialne enačbe}
+\subsubsection{Ločljive spremenljivke}
+\[g(y)y' = f(x)\]
+Upoštevamo, da je $y' = \frac{dy}{dx}$. Enačbo pomnožimop z $dx$ in integriramo obe strani enačbe.
+
+\subsubsection{Homogena diferencialna enačba}
+\[ y' = f(\frac{y}{x}) \]
+Uvedemo novo spremenlivko $v(x) = \frac{y}{x}$ $\Rightarrow$ $y = xv$ $\Rightarrow$ $y' = xv' + v$, vstavimo v začetno enačbo in dobimo
+\[xv' v = f(x)\ \Rightarrow\ \frac{v'}{f(v)-v} = \frac{1}{x}\]
+
+\subsubsection{Linearna diferencialna enačba}
+\[ p(x)y' + q(x)y = r(x)\]
+Najprej rešimo \emph{homogeni del} ($r(x) = 0$)
+\[py' + qy = 0\ \Rightarrow\ y = De^{P(x)};\ P(x) = -\int \frac{q}{p} dx \]
+$D$ postane funkcija odvisna od $x$ (\emph{variacija konstante}). Zgornjo enačbo odvajoamo in dobimo $y'$.
+\[y' = D'e^P - \frac{q}{p}De^P\]
+$y$ in $y'$ vstavimo v prvotno enačbo in iz nje izrazimo $D'$, $D$ dobimo z integriranjem.
+
+\subsubsection{Bernoullijeva diferencialna enačba}
+\[ p(x)y' + q(x)y = r(x)^\alpha\]
+Če je $\alpha = 0$, je enačba linearna.
+Če je $\alpha = 1$ ima ločljive spremenljivke.
+Sicer, enačbo prevedemo na linearno.
+
+Enačbo delimo z $y^\alpha$ in uvedemo novo funkcijo $z = y^{1-\alpha}$ $\Rightarrow$ $z' = (1-\alpha)y'y^{-\alpha}$. Dobimo linearno enačbo:
+\[\frac{1}{1-\alpha} pz' + qz = r\]
+
+\subsubsection{Eksaktne diferencialne enačbe}
+\[P(x,y)dx + Q(x,y)dy = 0 \quad \textmd{ali} \quad P+Qy' = 0\]
+Naj bo rešitev enačbe $u(x,y) = C$.
+
+Če je $P_y = Q_x$, obstaja funckcija $u$, da je $\triangledown u = (P,Q) \Rightarrow$ $u_x = P$, $u_y = Q$.
+
+\emph{Izračunamo $u$ tako da $u_x$ integriramo po $x$ (namesto konstante prištejemo funkcijo $f(y)$). Nato pravkar izračunani $u$ odvajamo po $y$ in ga enačimo z $u_y = Q$. Izrazimo $f'$ in z integriranjem dobimo $f$. }
+
+Če $P_y \neq Q_x$, obstaja integrajoči množitelj $\mu$, da je $(\mu P)_y = (\mu Q)_x$
+
+\subsubsection{Homegena linearna dif. enačba 2. reda}
+\[y'' + p(x)y' + q(x)y = 0\]
+Naj bo $y_1(x)$ dana rešitev enačbe. Drugo linearno neodvisno rešitev $y_2(x)$ dobimo kot rešitev
+\[y_1y'_2 - y'_1 y_2 = W(x) \quad W(x) = e^{-\int p(x)dx}\]
+
+\subsubsection{Nehomogena linearna dif. enačba 2. reda}
+\[y'' + p(x)y' + q(x)y = r(x)\]
+Naj bosta $y_1, y_2$ linearno neodvisni rešitvi homegene enačbe ($r(x) = 0$). Partikularno rešitev dobimo z nastavkom:
+\[y_p = C_1(x)y1+c_2(x)y_2\]
+kjer funkciji $C_1, C_2$ zadoščata
+\[C'_1y_1+C'_2y_2 = 0 \quad \quad C'_1y'_1+C'_2y'_2 = r(x)\]
+
+\subsubsection{Linearna dif. enačba 2. reda s konstantnimi koeficienti}
+\[y'' + py' + qy = r(x)\]
+Kjer sta $p, r \in \mathbb{R}$. 
+
+Najprej rešimo homogeni del. V zgornjo enačbo vstavimo $y = e^{\lambda x}$ in dobimo karakteristični polinom:
+\[\lambda^2+p\lambda+q=0\]
+\begin{itemize}
+    \item Če je $\lambda_1, \lambda_2 \in \mathbb{R}$, je splošna rešitev oblike
+    \[y = C_1e^{\lambda_1 x}+C_2e^{\lambda_2 x}\]
+    \item Če je $\lambda_1, \lambda_2 \in \mathbb{C}$, je splošna rešitev oblike
+    \[\lambda_1 = a + bi \quad \quad \lambda_2 = a - bi \]
+    \[y = C_1e^{a x} \cos bx +C_2e^{a x} \sin ax \]
+\end{itemize}
+
+\subsubsection{Linearna dif. enačba 2. reda s konstantnimi koeficienti in posebno vrsto nehomogenosti}
+\[y'' + py' + qy = P(x)e^{\lambda x}\]
+kjer so $p,q,\lambda \in \mathbb{R}$, $P(x)$ pa polinom.
+
+Partikularno rešitev določimo z nastavkom
+\[y_p = Q(x)x^ke^{\lambda x}\]
+Kjer je $Q(x)$ polinom iste stopnje kot $P$, $k$ pa pove večkratnost ničle karakterističnega polinoma. 
+
+\subsubsection{Sistemi linearnih diferencialnih enačb}
+\[\dot{x} = Ax\]
+Kjer je $A$ $2\times 2$ matrika.
+\begin{itemize}
+    \item Če se $A$ da diagonalizirati, oziroma ima dva linearno neodvisna lastna vektorja $\vect{e}_1$, $\vect{e}_2$ in lastni vrednosti $\lambda_1, \lambda_2$.
+    \[x(t) = C_1e^{\lambda_1t} \vect{e}_1 + C_2e^{\lambda_2t} \vect{e}_2\]
+    \item Če se $A$ ne da diagonalizirati, oziroma ima samo en lastni vektor $\vect{e}$, potem izračunamo $\vect{k}$ kot rešitev $(A-\lambda I)\vect{k} = \vect{e}$
+    \[x(t) = C_1e^{\lambda t} \vect{e} + C_2e^{\lambda t} (\vect{k} + t\vect{e}) \]
+\end{itemize}
+
+\end{multicols}
+\end{document}
